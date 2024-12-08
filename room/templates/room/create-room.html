@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Room Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #6f4caf;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .join-form {
+            padding: 20px;
+        }
+
+        .join-form input {
+            width: calc(100% - 30px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .join-form button {
+            background-color: #6f4caf;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .join-form button:hover {
+            background-color: #5945a0;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Chat App</div>
+        <div class="nav-links">
+            <a href="{%url 'index'%}">Home</a>
+            <a href="{%url 'rooms'%}">join room</a>
+            <!-- <a href="#features">Features</a> -->
+            
+            <div class="dropdown">
+                <a href="#">More</a>
+                <div class="dropdown-content">
+                    <li><a href="{%url 'account_profile' user.id%}">My Profile</a></li>
+                    <li><a href="{%url 'account_edit_profile' user.id%}">Edit Profile</a></li>
+                    <li><a href="{%url 'account_profile_settings'%}">Settings</a></li>
+                    <li><a href="{%url 'account_logout'%}">Log Out</a></li>
+                </div>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="https://via.placeholder.com/30" alt="Profile Picture">
+            <span>{{request.user.username}}</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Create Room Chat</h1>
+        </div>
+
+        <!-- Join Room Section -->
+        <div class="join-form" id="join-form">
+            <form method="POST" action="">
+                {%csrf_token%}
+            <h2>Create a Chat Room</h2>
+            
+            <input type="text" id="room" name="room_name" placeholder="Enter room name" required>
+            <input type="text"  name="description" id="" placeholder="descripte your room">
+            <button type="submit">Create Room</button>
+            <p >or join a room from here <a href="{%url 'rooms'%}">Join room</a></p>
+        </form>
+        </div>
+
+
+        <!-- Chat Room Section -->
+        
+    </div>
+
+<!--     <script>
+        function joinRoom() {
+            const username = document.getElementById('username').value;
+            const room = document.getElementById('room').value;
+            if (username && room) {
+                document.getElementById('join-form').style.display = 'none';
+                document.getElementById('chat-room').style.display = 'block';
+                document.getElementById('room-name').textContent = room;
+            }
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value;
+            if (message.trim()) {
+                const messagesContainer = document.getElementById('messages');
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', 'sent');
+                messageElement.textContent = message;
+                messagesContainer.appendChild(messageElement);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                messageInput.value = '';
+            }
+        }
+    </script> -->
+</body>
+</html>
